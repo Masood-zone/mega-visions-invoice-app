@@ -1,14 +1,16 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
+  useLocation,
 } from "react-router-dom";
 import Layout from "./layout";
 import MainErrorBoundary from "../components/errors/errorBoundary";
 import Login from "./auth/login";
 import AuthLayout from "./auth";
 import Dashboard from "./admin/dashboard";
-import Company from "./admin/company";
+import Company from "./admin/company/company";
 import AddCompany from "./admin/company/addCompany";
 import CompanyPage from "./admin/company/companyPage";
 import EditCompany from "./admin/company/editCompany";
@@ -36,7 +38,26 @@ import EditCustomer from "./admin/customer/editCustomer";
 import AddProduct from "./admin/product/addProduct";
 import ProductPage from "./admin/product/productPage";
 import EditProduct from "./admin/product/editProduct";
-// Routes Protection section
+import AdminLayout from "./admin";
+import Product from "./admin/product/product";
+import Profile from "./auth/profile";
+import { useAuth } from "../utils/useAuth";
+import toast from "react-hot-toast";
+import CompanyLayout from "./admin/company";
+//Authentication - (Protected Route)
+type ProtectedRouteProps = {
+  children: React.ReactNode;
+};
+
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+  const isAuthenticated = useAuth();
+  const location = useLocation();
+  if (!isAuthenticated) {
+    toast.error("You need to login to access this page!");
+    return <Navigate to="/auth/login" state={{ from: location }} replace />;
+  }
+  return <>{children}</>;
+};
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -48,6 +69,11 @@ const routes = createBrowserRouter(
           const { AdminLayout } = await import("./admin");
           return AdminLayout;
         }}
+        element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
       >
         {/* Dashboard */}
         <Route
@@ -65,7 +91,7 @@ const routes = createBrowserRouter(
             const { CompanyLayout } = await import("./admin/company");
             return CompanyLayout;
           }}
-          element={<Company />}
+          element={<CompanyLayout />}
         >
           <Route index element={<Company />} />
           <Route path="add-company" element={<AddCompany />} />
@@ -95,7 +121,7 @@ const routes = createBrowserRouter(
           }}
           element={<ProductLayout />}
         >
-          <Route index element={<Invoice />} />
+          <Route index element={<Product />} />
           <Route path="add-product" element={<AddProduct />} />
           <Route path="product/:id" element={<ProductPage />} />
           <Route path="edit-product/:id" element={<EditProduct />} />
@@ -142,6 +168,8 @@ const routes = createBrowserRouter(
           <Route path="customer/:id" element={<CustomerPage />} />
           <Route path="edit-customer/:id" element={<EditCustomer />} />
         </Route>
+        {/* Profile */}
+        <Route path="/admin/profile" element={<Profile />} />
       </Route>
       {/* Authentication pages */}
       <Route

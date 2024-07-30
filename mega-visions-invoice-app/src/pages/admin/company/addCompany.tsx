@@ -4,13 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { storeApi } from "../../../redux/api";
 import toast from "react-hot-toast";
 
-type CompanyFormProps = {
-  id: string;
-  name: string;
-  location: string;
-  telephone: string;
-};
-
 function AddCompany() {
   const [createCompany, { isLoading }] = storeApi.useCreateCompanyMutation();
   const navigate = useNavigate();
@@ -69,8 +62,9 @@ function AddCompany() {
           </ul>
         </div>
       </div>
-      {/* Forms */}
+      {/* Container */}
       <div className="my-5 bg-white w-full h-auto rounded-md shadow-md p-5">
+        {/* Forms */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-9">
           {/* Name */}
           <div className="flex flex-col w-full gap-2">

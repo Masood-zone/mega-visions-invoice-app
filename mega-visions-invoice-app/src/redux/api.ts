@@ -49,11 +49,11 @@ export const storeApi = createApi({
       }),
     }),
     getSingeCompany: builder.query({
-      query: (queryArg) => `/company/${queryArg.id}`,
+      query: (id) => `/company/${id}`,
     }),
     deleteCompany: builder.mutation({
-      query: (queryArg) => ({
-        url: `/company/delete/${queryArg.id}`,
+      query: (id) => ({
+        url: `/company/delete/${id}`,
         method: "DELETE",
       }),
     }),
@@ -79,7 +79,7 @@ export const storeApi = createApi({
       }),
     }),
     getSingleInvoice: builder.query({
-      query: (queryArg) => `/invoice/${queryArg.id}`,
+      query: (id) => `/invoice/${id}`,
     }),
     deleteInvoice: builder.mutation({
       query: (queryArg) => ({

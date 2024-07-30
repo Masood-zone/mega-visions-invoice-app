@@ -2,6 +2,8 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import CellComponent from "../../../components/_tests/cell-component";
 import Table from "../../../components/table";
 import { storeApi } from "../../../redux/api";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Company() {
   const {
@@ -9,15 +11,23 @@ function Company() {
     isLoading,
     error,
   } = storeApi.useGetAllCompaniesQuery({});
-
+  const [deleteCompany] = storeApi.useDeleteCompanyMutation();
+  const navigate = useNavigate();
   const onEdit = (id: string) => {
-    console.log(id);
+    navigate(`/admin/company/edit-company/${id}`);
   };
   const onView = (id: string) => {
-    console.log(id);
+    navigate(`/admin/company/company/${id}`);
   };
-  const onDelete = (id: string) => {
-    console.log(id);
+  const onDelete = async (id: string) => {
+    try {
+      const res = await deleteCompany(id).unwrap();
+      if (res) {
+        toast.success("Company deleted successfully");
+      }
+    } catch (error) {
+      toast.error("Error deleting company");
+    }
   };
 
   const columnDefs = [
@@ -44,8 +54,6 @@ function Company() {
     sortable: true,
     filter: true,
   };
-
-  console.log(error);
 
   return (
     <section className="w-full h-full">

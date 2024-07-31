@@ -53,7 +53,7 @@ export const storeApi = createApi({
     }),
     deleteCompany: builder.mutation({
       query: (id) => ({
-        url: `/company/delete/${id}`,
+        url: `/company/${id}`,
         method: "DELETE",
       }),
     }),
@@ -82,8 +82,8 @@ export const storeApi = createApi({
       query: (id) => `/invoice/${id}`,
     }),
     deleteInvoice: builder.mutation({
-      query: (queryArg) => ({
-        url: `/invoice/delete/${queryArg.id}`,
+      query: (id) => ({
+        url: `/invoice/${id}`,
         method: "DELETE",
       }),
     }),
@@ -109,35 +109,35 @@ export const storeApi = createApi({
       query: (queryArg) => `/product/${queryArg.id}`,
     }),
     deleteProduct: builder.mutation({
-      query: (queryArg) => ({
-        url: `/product/delete/${queryArg.id}`,
+      query: (id) => ({
+        url: `/product/${id}`,
         method: "DELETE",
       }),
     }),
     // Sales endpoints
     getAllSales: builder.query({
-      query: () => "/sales",
+      query: () => "/salesdep",
     }),
     createSales: builder.mutation({
       query: (queryArg) => ({
-        url: "/sales/create",
+        url: "/salesdep/create",
         method: "POST",
         body: queryArg,
       }),
     }),
     updateSales: builder.mutation({
       query: (queryArg) => ({
-        url: `/sales/update/${queryArg.id}`,
+        url: `/salesdep/update/${queryArg.id}`,
         method: "PUT",
         body: queryArg,
       }),
     }),
     getSingleSales: builder.query({
-      query: (queryArg) => `/sales/${queryArg.id}`,
+      query: (queryArg) => `/salesdep/${queryArg.id}`,
     }),
     deleteSales: builder.mutation({
-      query: (queryArg) => ({
-        url: `/sales/delete/${queryArg.id}`,
+      query: (id) => ({
+        url: `/salesdep/${id}`,
         method: "DELETE",
       }),
     }),
@@ -163,8 +163,8 @@ export const storeApi = createApi({
       query: (queryArg) => `/employee/${queryArg.id}`,
     }),
     deleteEmployee: builder.mutation({
-      query: (queryArg) => ({
-        url: `/employee/delete/${queryArg.id}`,
+      query: (id) => ({
+        url: `/employee/${id}`,
         method: "DELETE",
       }),
     }),
@@ -190,8 +190,8 @@ export const storeApi = createApi({
       query: (queryArg) => `/customer/${queryArg.id}`,
     }),
     deleteCustomer: builder.mutation({
-      query: (queryArg) => ({
-        url: `/customer/delete/${queryArg.id}`,
+      query: (id) => ({
+        url: `/customer/${id}`,
         method: "DELETE",
       }),
     }),

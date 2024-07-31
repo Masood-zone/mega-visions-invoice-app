@@ -16,3 +16,32 @@ type InvoiceFormProps = {
   unitPrice: number;
   total: number;
 };
+
+type SalesFormProps = {
+  id: string;
+  purpose: string;
+  name: string;
+  companyId: string;
+};
+
+type ProductFormProps = {
+  id: string;
+  name: string;
+  warrantyObliged: string;
+  barCode: string;
+};
+
+type EmployeeFormProps = {
+  id: string;
+  name: string;
+  role: string;
+  skills: string;
+  salesDepartmentId: string;
+};
+
+type CustomerFormProps = {
+  id: string;
+  name: string;
+  phoneNumber: string;
+  homeAddress: string;
+};

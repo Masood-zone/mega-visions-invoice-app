@@ -66,7 +66,7 @@ function AddCompany() {
       <div className="my-5 bg-white w-full h-auto rounded-md shadow-md p-5">
         {/* Forms */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-9">
-          {/* Name */}
+          {/* ID */}
           <div className="flex flex-col w-full gap-2">
             <label htmlFor="id">Company ID</label>
             <input
@@ -112,29 +112,24 @@ function AddCompany() {
               <p className="text-red-600">{errors.location.message}</p>
             )}
           </div>
-          <div className="w-60 flex items-center gap-3">
+          {/* Submit */}
+          <div className="flex flex-col gap-4">
             <button
               type="submit"
-              className="btn btn-md rounded btn-primary disabled:text-black"
+              className="btn btn-primary text-lg"
               disabled={isLoading}
             >
               {isLoading ? (
                 <>
-                  <span className="loading loading-spinner loading-md"></span>
+                  <span className="loading loading-spinner loading-sm"></span>
                   Creating...
                 </>
               ) : (
-                "Create"
+                "Create Company"
               )}
             </button>
-            <button
-              onClick={() => {
-                handleReset();
-              }}
-              disabled={isLoading}
-              className="btn btn-md rounded text-white bg-red-600 hover:bg-red-700"
-            >
-              Discard
+            <button type="button" onClick={handleReset} className="btn text-lg">
+              Reset
             </button>
           </div>
         </form>
